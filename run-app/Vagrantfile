@@ -1,0 +1,44 @@
+Vagrant.configure("2") do |config|
+
+  # This is just to make the download a little bit faster. Ignore this. 
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
+  end
+
+
+  # Sync Folders. Everthing you put in the current direcory will be availabe inside the VM in the directory /vagrant.
+  # Similarly, everything you put in the folder shared will be availabe inside de the VM in the directory /shared.
+  config.vm.synced_folder ".", "/vagrant"
+  config.vm.synced_folder "../shared", "/shared"
+
+  # Stop some firewall and security configuration so that you don't have to worry it this and makes things easier. Ignore this.
+  config.vm.provision "shell",
+    inline: "sudo systemctl stop firewalld; sudo systemctl disable firewalld; sudo setenforce Permissive"
+
+
+  #Define backend VM
+  config.vm.define "backend" do |backend|
+    backend.vm.box = "generic/centos7"
+    backend.vm.network "forwarded_port", guest: 4001, host: 4001
+
+    # This 
+    #backend.vm.network :private_network, ip: "10.0.0.8"
+
+    backend.vm.provision :shell, path: "run-backend.sh"
+
+  end
+
+  #Define backend VM
+  config.vm.define "frontend" do |frontend|
+    frontend.vm.box = "generic/centos7"
+
+    frontend.vm.network "forwarded_port", guest: 80, host: 5000
+
+    # 
+    #frontend.vm.network :private_network, ip: "10.0.0.10"
+
+    frontend.vm.provision :shell, path: "run-frontend.sh"
+
+  end
+
+end

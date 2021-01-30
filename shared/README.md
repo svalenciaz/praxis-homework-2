@@ -1,0 +1,1 @@
+This is a shared folder. Everything you put here will shared among all the virtual machines you create. Here you will place all the artifacts you created with the build-app VM, so that the run-app VM can access to them.

@@ -5,28 +5,28 @@ sudo yum update -y
 
 # Install git
 sudo yum install git -y
-
+git --version
 # Install Go
 sudo yum install golang -y
-
+go version
 # Install node js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 
 source ~/.bash_profile
 
-nvm install 14
-
-
+nvm install 10
+node --version
+npm --version
 # curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
 # sudo yum install nodejs -y
 
 npm install -g yarn
-
-# yarn global add @vue/cli
+yarn --version
+yarn global add @vue/cli
 
 # Install vuejs
-npm install -g @vue/cli
-
+#npm install -g @vue/cli
+vue --version
 # Install Vue CLI
 #curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
 
@@ -48,32 +48,6 @@ npm install -g @vue/cli
 
 source ~/.bash_profile
 
-# ----------  Verify instalations --------------
-# Git version
-git --version
-
-# Go version
-go version
-
-# Node version
-node --version
-
-# Npm version
-npm --version
-
-# Vue version
-vue --version
-
-yarn --version
-
-# source ~/.bash_profile
-
-# Install Vue CLI
-# curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
-
-# sudo yum install yarn -y
-
-source ~/.bash_profile
 
 # yarn global add @vue/cli
 
@@ -81,7 +55,6 @@ source ~/.bash_profile
 rm -rf ~/project
 mkdir ~/project
 cd ~/project
-
 # Clone the repository
 git clone https://github.com/jdmendozaa/vuego-demoapp.git
 
@@ -97,19 +70,16 @@ sudo mkdir -p /shared/server
 go build -o /shared/server
 
 cd ~/project/vuego-demoapp/spa
-
 echo 'VUE_APP_API_ENDPOINT="http://10.0.0.8:4001/api"' > ~/project/vuego-demoapp/spa/.env.production.local
 
-# yarn import
+yarn import
 
-#rm -f package-lock.json
+rm -f package-lock.json
 
-# yarn upgrade
+yarn upgrade
 
-# yarn install
+yarn install
 
-# yarn build
-
-# tar cvfz front.tar.gz ./dist
-
-# mv front.tar.gz /shared
+yarn build
+tar cvfz front.tar.gz ./dist
+mv front.tar.gz /shared

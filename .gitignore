@@ -1,1 +1,4 @@
 **/.vagrant
+shared/*
+shared/server
+shared/server/*
